@@ -1,0 +1,48 @@
+---
+title: "Checklist.sian.md"
+fontfamily: mathpazo
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  # pdf_document: default
+  html_document: default
+geometry: margin = 1in
+fontsize: 11pt
+---
+
+```{r, echo = FALSE, results = 'hide', include = FALSE}
+#----------------------------------- set path
+data_in <- "/Users/root1/Desktop/github/ebirdtravelnote/"
+setwd(data_in)
+#-----------------------------------load packages
+library(knitr)
+library(xtable)
+library(stargazer)
+library(rmarkdown)
+library(tidyverse)
+library(kableExtra)
+library(data.table)
+#-----------------------------------input data
+data <- fread('checklist.csv', 
+              header = FALSE) %>%
+  .[, 1:2]
+```
+
+```{r, echo = FALSE, cache = FALSE, message = FALSE, warning = FALSE}
+# data %>%
+  # kable(caption = 'nickname', 
+  #       col.names = 'nickname') %>%
+  # kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+  # kable_styling(c("striped", "bordered"))
+
+stargazer(data,
+          type = 'html',
+          title = 'table',
+          summary = FALSE,
+          colnames = FALSE,
+          rawnames = FALSE,
+          header = FALSE,
+          ci = NA
+          )
+
+
+```
